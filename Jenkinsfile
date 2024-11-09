@@ -1,9 +1,9 @@
-pipeline {
+iipipeline {
     agent any
     stages {
         stage('Clone Repository') {
             steps {
-                checkout scmGit(branches: [[name: '*/min']], extensions: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/Hemanthsrk/front-backend.git']])
+                git 'https://github.com/Hemanthsrk/project.git'
             }
         }
 
