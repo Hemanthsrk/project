@@ -1,10 +1,8 @@
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
     <artifactId>employee-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -48,14 +46,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- MySQL Driver (optional) -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.1.0</version>
-            <scope>runtime</scope>
-        </dependency>
-
         <!-- H2 Database (for testing) -->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -63,20 +53,14 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Jackson Databind for JSON Processing -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
-        <!-- Lombok (for reducing boilerplate code) -->
+        <!-- Lombok (to reduce boilerplate code) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Spring Boot DevTools (for development) -->
+        <!-- Spring Boot DevTools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -84,7 +68,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring Boot Starter Test (for testing) -->
+        <!-- Spring Boot Starter Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -94,7 +78,6 @@
 
     <build>
         <plugins>
-            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -103,8 +86,3 @@
     </build>
 
 </project>
-
-       
-           
-
-
