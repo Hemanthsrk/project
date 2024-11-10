@@ -1,17 +1,19 @@
 pipeline {
     agent any
-   stages {
+    stages {
         stage('Checkout') {
             steps {
-                sh 'https://github.com/Hemanthsrk/project.git'
+                git 'https://github.com/Hemanthsrk/project.git'
             }
         }
-
-        stage('Build Docker Image') {
+        
+        stage('Build Docker Images') {
             steps {
                 script {
-                    sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
+                    sh 'docker build -t backend-image -f Dockerfile.backend .'
+                    sh 'docker build -t frontend-image -f Dockerfile.frontend .'
                 }
             }
         }
-                
+    }    
+}
