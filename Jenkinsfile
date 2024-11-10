@@ -10,6 +10,9 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t Dockerfile'
+		    sh 'docker build -t your-image-name'
+		    sh 'docker build -t employee-app'
+		    sh 'docker build -t employee-app -f path/to/Dockerfile'
                 }
             }
         }
