@@ -77,7 +77,7 @@ kd4Jn1NBQbmLksa5DtJTwgXXs7rptbSwshdH2L3zBEe8d6he590="
   }
 }
 
-output "13.201.60.236" {
+output "43.205.103.235" {
   value = aws_instance.minikube_server.public_ip
 }
 
