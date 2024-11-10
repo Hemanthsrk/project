@@ -1,36 +1,55 @@
 pipeline {
     agent any
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-               git clone 'https://github.com/Hemanthsrk/project.git'
+                sh 'https://github.com/Hemanthsrk/project.git'
             }
         }
-        stage('Build Docker Images') {
+
+        stage('Build Docker Image') {
             steps {
                 script {
-		    sh 'docker build -t your-image-name .'
-		    sh 'docker build -t employee-app .'
-		    sh 'docker build -t employee-app -f path/to/Dockerfile .'
+                    sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
                 }
             }
         }
-        stage('Deploy using Terraform') {
+
+        stage('Push Docker Image') {
             steps {
                 script {
-                    sh 'cd terraform && terraform init'
-                    sh 'terraform apply -auto-approve'
+                    sh 'docker push ${DOCKER_IMAGE}:${DOCKER_TAG}'
+                }
+            }
+        }
+
+        stage('Terraform Plan & Apply') {
+            steps {
+                script {
+                    // Run Terraform scripts to create resources
+                    sh 'terraform init'
+                    sh 'terraform plan -out=tfplan'
+                    sh 'terraform apply -auto-approve tfplan'
                 }
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f frontend-deployment.yaml'
-		sh 'kubectl apply -f backend-deployment.yaml'
-		sh 'kubectl apply -f service,yaml'
+                script {
+                    sh 'kubectl set image deployment/${K8S_DEPLOYMENT} ${K8S_DEPLOYMENT}=${DOCKER_IMAGE}:${DOCKER_TAG} --namespace=${K8S_NAMESPACE}'
+                }
             }
-        }    
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and Deployment Successful'
+        }
+        failure {
+            echo 'Build or Deployment Failed'
+        }
     }
 }
-                     
+                   

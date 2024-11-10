@@ -1,28 +1,25 @@
-# Stage 1: Build the Frontend
-FROM node:20-alpine AS frontend-builder
-WORKDIR /app/frontend
-COPY frontend/package*.json ./
-COPY frontend/ ./
-
-RUN npm install 
+# Frontend build stage
+FROM node:16 AS frontend-build
+WORKDIR /frontend
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm install
+COPY frontend/ .
 RUN npm run build
 
-# Stage 2: Build the Backend
-FROM golang:1.21-alpine AS backend-builder
-WORKDIR /app/backend
+# Backend build stage
+FROM golang:1.20 AS backend-build
+WORKDIR /backend
 COPY backend/go.mod backend/go.sum ./
 RUN go mod download
-COPY backend/ ./
+COPY backend/ .
+RUN go build -o /backend/main .
 
-RUN go build -o employee-service main.go
-
-# Stage 3: Final Image
-FROM alpine:3.18
+# Final image
+FROM ubuntu:20.04
 WORKDIR /app
-RUN apk add --no-cache ca-certificates
-COPY --from=backend-builder /app/backend/employee-service /app/employee-service
-COPY --from=frontend-builder /app/frontend/build /app/frontend/build
-EXPOSE 8080
+COPY --from=frontend-build /frontend/build /app/frontend
+COPY --from=backend-build /backend/main /app/backend
 
-CMD ./employee-service
+EXPOSE 3000 8080
+CMD ["bash", "-c", "cd /app/frontend && serve -s . -l 3000 & cd /app/backend && ./main"]
 
