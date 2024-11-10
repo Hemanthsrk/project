@@ -9,16 +9,6 @@ pipeline {
                git clone 'https://github.com/Hemanthsrk/project.git'
             }
         }
-
-        stage('Build with Maven') {
-            steps {
-                sh 'mvn validate'
-		sh 'mvn compile'
-		sh 'mvn test'
-		sh 'mvn package'
-            }
-        }
-
         stage('Build Docker Images') {
             steps {
                 script {
