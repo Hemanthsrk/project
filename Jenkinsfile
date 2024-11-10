@@ -3,7 +3,7 @@ iipipeline {
     stages {
         stage('Clone Repository') {
             steps {
-               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'a7352eb0-b284-4675-b70d-361f7a603366', url: 'https://github.com/Hemanthsrk/project.git']])
+               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git1122', url: 'https://github.com/Hemanthsrk/project.git']])
             }
         }
 
