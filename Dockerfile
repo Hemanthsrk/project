@@ -4,7 +4,8 @@ WORKDIR /app/frontend
 COPY frontend/package*.json ./
 COPY frontend/ ./
 
-RUN npm install && npm run build
+RUN npm install 
+RUN npm run build
 
 # Stage 2: Build the Backend
 FROM golang:1.21-alpine AS backend-builder
