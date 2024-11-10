@@ -9,8 +9,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh 'docker build -t Dockerfile.frontend'
-                    sh 'docker build -t Dockerfile.backend'
+                    sh 'docker build -t Dockerfile'
                 }
             }
         }
