@@ -12,7 +12,10 @@ pipeline {
 
         stage('Build with Maven') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn validate'
+		sh 'mvn compile'
+		sh 'mvn test'
+		sh 'mvn package'
             }
         }
 
