@@ -1,9 +1,12 @@
-iipipeline {
+pipeline {
     agent any
+	tools {
+        maven 'Maven 3.0.5' 
+    }
     stages {
         stage('Clone Repository') {
             steps {
-               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git1122', url: 'https://github.com/Hemanthsrk/project.git']])
+               git clone 'https://github.com/Hemanthsrk/project.git'
             }
         }
 
@@ -16,8 +19,8 @@ iipipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh 'docker build -t Docker.frontend'
-                    sh 'docker build -t Docker.backend'
+                    sh 'docker build -t Dockerfile.frontend'
+                    sh 'docker build -t Dockerfile.backend'
                 }
             }
         }
