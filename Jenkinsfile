@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-               git clone 'checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '1122', url: 'https://github.com/Hemanthsrk/project.git']])'
+               git clone 'https://github.com/Hemanthsrk/project.git'
             }
         }
 
