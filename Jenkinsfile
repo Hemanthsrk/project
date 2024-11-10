@@ -16,8 +16,8 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh 'docker build -t Docker.frontend'
-                    sh 'docker build -t Docker.backend'
+                    sh 'docker build -t Dockerfile.frontend'
+                    sh 'docker build -t Dockerfile.backend'
                 }
             }
         }
