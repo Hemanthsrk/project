@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1" # Change this as per your region
+  region = "ap-south-1" 
 }
 
 # Create VPC
@@ -101,8 +101,8 @@ resource "aws_security_group" "minikube_sg" {
 
 # Create an EC2 Instance for Minikube
 resource "aws_instance" "minikube" {
-  ami             = "ami-08c40ec9ead489470" # Amazon Linux 2 AMI
-  instance_type   = "t3.micro"
+  ami             = "ami-03753afda9b8ba740" # Amazon Linux 2 AMI
+  instance_type   = "t2.medium"
   subnet_id       = aws_subnet.subnet[0].id
   security_groups = [aws_security_group.minikube_sg.name]
 
