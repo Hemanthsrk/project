@@ -1,7 +1,7 @@
 Provider configuration for AWS
 provider "aws" {
-  access_key = "AKIA2XSVAX5M4TT5EQL6"
-  secret_key = " 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"
+  access_key = "access key in aws"
+  secret_key = " secret key in aws"
   region = "ap-south-1"
 }
 
